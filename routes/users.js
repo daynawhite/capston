@@ -6,7 +6,7 @@ router.get('/', usersController.getAllUsers)
 
 router.get('/:id', usersController.getUserById)
 
-router.post('/', usersController.createUser)
+router.post('/', usersController.createUser, usersController.login)
 
 router.post('/login', usersController.login)
 

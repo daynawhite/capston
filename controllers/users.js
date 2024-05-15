@@ -45,7 +45,7 @@ const getUserById = (req, res) => {
   });
 };
 
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   let hash = await argon2.hash(req.body.password);
   let sql = "INSERT INTO ?? (??, ??, ??) VALUES (?, ?, ?)";
   const replacements = [
@@ -62,7 +62,8 @@ const createUser = async (req, res) => {
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err);
-    return res.json({ newId: results.insertId });
+    // return res.json({ newId: results.insertId });
+    next()
   });
 };
 

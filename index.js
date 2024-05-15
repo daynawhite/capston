@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/users", userRoutes)
-app.use(petRoutes)
+app.use("/pets", petRoutes)
 const port = process.env.PORT || 3330;
 app.get("/",(req, res) => {
     res.json("Welcome to my server.")

@@ -22,7 +22,7 @@ const login = async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: 600 * 100 * 100 * 10 }
       );
-      return res.json({ token });
+      return res.json({ token, first_name:rows[0].first_name });
     }
   });
 };

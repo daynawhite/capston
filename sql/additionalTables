@@ -1,0 +1,36 @@
+
+CREATE TABLE health (
+	id int,
+    FOREIGN KEY (id) REFERENCES pet_info(id),
+    weight int,
+    diet varchar(50),    
+    veterinarian varchar(45) NOT NULL
+);
+CREATE TABLE vaccinations (
+	id int,
+	FOREIGN KEY (id) REFERENCES pet_info(id),
+    vaccine_name varchar(50),
+    date_given timestamp,
+    date_due timestamp
+);
+CREATE TABLE meds (
+	id int,
+	FOREIGN KEY (id) REFERENCES pet_info(id),
+    med_name varchar(50),
+    reason_prescribed varchar(50),
+    frequency varchar(50)
+);
+CREATE TABLE supplements (
+	id int,
+	FOREIGN KEY (id) REFERENCES pet_info(id),
+    supplement_given varchar(45),
+    frequency varchar(50)
+);
+CREATE TABLE injury_illness_intervention (
+	id int,
+	FOREIGN KEY (id) REFERENCES pet_info(id),
+    issue varchar(70),
+    vet_visit_date timestamp,
+    treatment varchar(70),
+    notes varchar(100)
+);

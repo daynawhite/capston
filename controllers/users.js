@@ -16,7 +16,7 @@ const login = async (req, res) => {
       if (!match) return res.json("email or password is incorrect");
       let token = jsonwebtoken.sign(
         {
-          id: rows[0].id,
+          user_id: rows[0].id,
           first_name: rows[0].first_name,
         },
         process.env.JWT_SECRET,

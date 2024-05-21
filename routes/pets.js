@@ -1,12 +1,13 @@
 const express = require('express')
 const usersController = require('../controllers/pets')
+const checkJWT = require('../controllers/checkJWT')
 const router = express.Router()
 
 router.get('/', usersController.getAllPets)
 
 router.get('/:id', usersController.getPetById)
 
-router.post('/', usersController.createPet)
+router.post('/', checkJWT, usersController.createPet)
 
 router.put('/:id', usersController.updatePetById)
 

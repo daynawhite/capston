@@ -23,8 +23,8 @@ const getPetById = (req, res) => {
 
 const createPet = (req, res) => {
   // INSERT INTO PETS NAME 
-  let sql = 'INSERT INTO ?? (??) VALUES (?)'
-  const replacements = ['pets', 'pet_name', req.body.pet_name]
+  let sql = 'INSERT INTO ?? (??, ??, ??) VALUES (?, ?, ?)'
+  const replacements = ['pet_info', 'user_id', 'pet_name', 'animal_type', req.user_id, req.body.pet_name, req.body.animal_type]
   
   sql = mysql.format(sql, replacements)
 
@@ -38,7 +38,7 @@ const updatePetById = (req, res) => {
   // UPDATE PET NAME WHERE ID = <REQ PARAMS ID>
   const selectedPetId = req.params.id;
   let sql = "UPDATE ?? SET ?? = ?, ?? = ?  WHERE ?? = ?"
-  const replacements = ['pets', 'pet_name', req.body.pet_name, 'id', selectedPetId]
+  const replacements = ['pet_info', 'pet_name', req.body.pet_name, 'id', selectedPetId]
   sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, results) => {
@@ -50,7 +50,7 @@ const updatePetById = (req, res) => {
 const deletePetByPetName = (req, res) => {
   // DELETE FROM PETS WHERE PET NAME = <REQ PARAMS PET_NAME>
   let sql = "DELETE FROM ?? WHERE ?? = ?"
-  const replacements = ['pets', 'pet_name', req.params.pet_name]
+  const replacements = ['pet_info', 'pet_name', req.params.pet_name]
   sql = mysql.format(sql, replacements);
 
   pool.query(sql, (err, results) => {

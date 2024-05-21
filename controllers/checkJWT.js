@@ -2,6 +2,7 @@ const JWT = require ("jsonwebtoken")
 const supersecret = process.env.JWT_SECRET
 
 const checkJWT = (req, res, next) => {
+    console.log('inside checkJWT function')
     let token;
     if (!req.headers.authorization) {
         token = null;

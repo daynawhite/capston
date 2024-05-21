@@ -12,9 +12,20 @@ const getAllPets = (req, res) => {
 
 const getPetById = (req, res) => {
   let sql = 'SELECT * FROM ?? WHERE ?? = ?'
-  const replacements = ['pet', 'id', req.params.id]
+  const replacements = ['pet_info', 'id', req.params.id]
   sql = mysql.format(sql, replacements)
 
+  pool.query(sql, (err, rows) => {
+    if (err) return handleSQLError(res, err)
+    return res.json(rows);
+  })
+}
+
+const getPetsByUserId = (req, res) => {
+  let sql = 'SELECT * FROM ?? WHERE ?? = ?'
+  const replacements = ['pet_info', 'user_id', req.user_id]
+  sql = mysql.format(sql, replacements)
+console.log(sql)
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err)
     return res.json(rows);
@@ -62,6 +73,7 @@ const deletePetByPetName = (req, res) => {
 module.exports = {
   getAllPets,
   getPetById,
+  getPetsByUserId,
   createPet,
   updatePetById,
   deletePetByPetName

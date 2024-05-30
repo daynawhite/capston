@@ -9,11 +9,11 @@ const login = async (req, res) => {
   let sql = "SELECT * FROM users WHERE email = ?";
   pool.query(sql, [email], async (err, rows) => {
     if (err) return handleSQLError(res, err);
-    if (!rows[0]) return res.json("user does not exist");
+    if (!rows[0]) return res.status(401).json("user does not exist");
     else {
       const hash = rows[0].password;
       let match = await argon2.verify(hash, password);
-      if (!match) return res.json("email or password is incorrect");
+      if (!match) return res.status(401).json("email or password is incorrect");
       let token = jsonwebtoken.sign(
         {
           user_id: rows[0].id,

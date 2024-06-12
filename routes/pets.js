@@ -13,6 +13,6 @@ router.post('/', checkJWT, usersController.createPet)
 
 router.put('/:id', usersController.updatePetById)
 
-router.delete('/:username', usersController.deletePetByPetName)
+router.delete('/:pet_name', usersController.deletePetByPetName)
 
 module.exports = router
